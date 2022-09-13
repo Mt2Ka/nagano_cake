@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row  pt-5 mt-3 d-flex align-items-center">
+    <div class="col-12 text-center">
+      <h4><strong>本当に退会しますか？</strong></h4>
+    </div>
+    <div class="col-12 text-center">
+      <p class="pt-3">
+  　　  　退会すると、会員登録情報や</br>
+  　     これまでの購入履歴が閲覧できなくなります。</br>
+        退会する場合は、 「退会する」をクリックしてください。
+      </p>
+    </div>
+</div>
+<div class="container center_block" style="width:15rem;">
+  <div class="row pt-3">
+    <div class="col-auto">
+      <%= link_to show_path(@cusotmer),method: :get do %>
+        <button type="button" class="btn btn-sm btn-primary">退会しない</button>
+      <% end %> 
+    </div>
+    <div class="col-auto"> 
+      <%= link_to unsubscribe_path,method: :patch, "data-confirm" => "本当に退会しますか？" do %>
+        <button type="button" class="btn btn-sm btn-danger">退会する</button>
+      <% end %> 
+    </div>   
+  </div>
+</div>
+
+

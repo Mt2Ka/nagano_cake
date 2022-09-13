@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <h4 class="ml-4 mb-3 pt-2">注文履歴一覧</h4>
+    </div>
+  </div>
+
+  <div class="row pb-3 pl-3">
+    <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="table-active">購入日時</th>
+          <th class="table-active">購入者</th>
+          <th class="table-active">注文個数</th>
+          <th class="table-active">注文ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+       <% @orders.each do |order| %>
+        <tr>
+          <td><span>
+            <%= link_to admin_order_path(order.id),method: :get do %>
+              <%= order.created_at.strftime("%Y/%m/%d/").to_s %>
+              <%= order.created_at.strftime("%H:%M:%S").to_s %>
+            <% end %>
+          </span></td>
+          <td><span>
+            <%= order.customer.last_name %>
+            <%= order.customer.first_name %>
+          </span></td>
+          <td><span>
+            <%= order.order_details.sum(:quantity) %>
+          </span></td>
+          <td><span>
+            <%= order.order_status_i18n %>
+          </span></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+    </div>
+
+  <div class="row">
+    <div class="col-4 m-auto">
+      <%= paginate @orders %>
+    </div>
+  </div>
+
+</div>

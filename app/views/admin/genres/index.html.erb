@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <h4 class="ml-4 mb-3 pt-2 pb-4">ジャンル一覧・追加</h4>
+    </div>
+  </div>
+  
+  <% if @genre.errors.any? %>
+    <div id="error_explanation">
+      <h5 class="text-danger pt-3">未入力項目があります。</h5>
+      <p class="text-danger">ジャンル名を入力してください。</p>
+    </div>
+  <% end %>
+
+  <div class="row pb-4">
+    <div class="col-auto">
+    <%= form_with model:@genre,url:admin_genres_path,method: :post do |f| %>
+      <label for="name"><strong>ジャンル名</strong></label>
+    </div>
+    <div class="col-auto">
+      <%= f.text_field :name,placeholder: "ジャンル名" %>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-sm btn-success" type="submit">新規登録</button></br>
+    </div>
+    <% end %>
+  </div>
+
+  <div class-"row">
+    <div class="col-4 pl-0">
+      <table class="table">
+        <thead>
+          <tr class="table-active">
+            <th class="pl-5">ジャンル</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <% @genres .each do |genre| %>
+        <tbody>
+        <tr>
+          <td><%= genre.name %></td>
+          <td>
+            <%= link_to edit_admin_genre_path(genre) do %>
+             <button type="button" class="btn btn-success">編集する</button>
+            <% end %>
+          </td>
+        </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+

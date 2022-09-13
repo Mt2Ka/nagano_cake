@@ -1,0 +1,76 @@
+<div class="container">
+  
+  <h4 class="ml-4 pl-5">商品新規登録</h4>
+  
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h5 class="text-danger pt-3"><%= pluralize(@item.errors.count,"件") %> 入力エラーがあります。</h5>
+      <p class="text-danger">全ての項目を入力してください。</p>
+    </div>
+  <% end %>
+
+  <%= form_with model:@item,url:admin_items_path,method: :post do |f| %>
+  <div class="row pl-5 pt-4">
+    <div class="col-2 pl-1">
+      <label for="image">商品画像</label>
+    </div>
+    <div class="col-9">
+    　<%= f.file_field :image, accept: "image/*" %>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <label for="name">商品名</label>
+    </div>
+    <div class="col-9">
+    　<%= f.text_field :name,placeholder: "商品名" %>
+    </div>      
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <label for="introduction">商品説明</label>
+    </div>
+    <div class="col-9">
+    　<%= f.text_area :introduction,placeholder: "ここに説明文を記述します" %>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <label for="genre">ジャンル</label>
+    </div>
+    <div class="col-9">
+    　<%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name),include_blank: "--選択してください--" %>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <label for="price">税抜価格</label>
+    </div>
+    <div class="col-9">
+    　<%= f.text_field :price,placeholder: "1000" %>円
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <label for="is_active">販売ステータス</label>
+    </div>
+    <div class="col-9">
+    　<%= f.radio_button :is_active, 'true' %>
+    　<%= f.label :is_active, '販売中', value: true %>
+    
+    　<%= f.radio_button :is_active, 'false' %>
+    　<%= f.label :is_active, '販売停止中', value: false %></br>
+    </div>
+  </div>
+
+  <div class="row pt-3">
+    <div class="col-4 text-right">
+      <button class="btn btn-success" type="submit">新規登録</button>           
+    </div>
+  </div>  
+  
+  <% end %>
+</div>
+
+
+

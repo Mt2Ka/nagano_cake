@@ -1,0 +1,29 @@
+<div class="card bg-dark text-white m-auto" style="max-width: 50rem;">
+  <%= image_tag "23822648_s.jpg"%>
+  <div class="card-img-overlay pt-5">
+    <h5 class="card-title">ようこそ、ながのCAKEへ！</h5>
+    <p class="card-text">このサイトは、ケーキ販売のECサイトになります。</br>
+           会員でない方も商品の閲覧はできますが、</br>
+           購入には、会員登録が必要になります。
+  </div>
+</div>
+<div class="container pt-5">
+  <h3 class="pb-2 pt-6"><strong>新着商品</strong></h3>
+    <div class="row cols-auto">
+      <% @items .each do |item| %>
+        <div class="img-fluid max-width: 100%; , height: auto">
+          <%= link_to item_path(item) do %>
+            <span><%= image_tag item.get_image(240,240) %></span></br>
+          <% end %>
+          <strong><%= item.name %></strong></br>
+          <strong>¥<%= item.price.to_s(:delimited) %></strong>
+        </div>
+      <% end %>
+    </div>
+</div>
+<div class="text-right">
+  <%= link_to "全ての商品を見る＞", items_path %>
+</div>
+</div>
+</div>
+

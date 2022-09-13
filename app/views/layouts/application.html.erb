@@ -2,15 +2,126 @@
 <html>
   <head>
     <title>NaganoCake</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-bland h4 text-dark text-decoration-none" href="https://cf8f9bd9c4a6456fa73fef7201459ed4.vfs.cloud9.ap-northeast-1.amazonaws.com/">
+            <%= image_tag "Free_Sample_By_Wix (7).jpeg" %>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if admin_signed_in? %>
+              <p class="notice pl-3 mb-0 pt-2">
+                <%= notice %>
+              </p>
+            <li class="nav-link">
+              <%= link_to admin_items_path do %>
+                <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to admin_customers_path do %>
+                <button type="button" class="btn btn-outline-secondary">会員一覧</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to admin_root_path do %>
+                <button type="button" class="btn btn-outline-secondary">注文履歴一覧</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to admin_genres_path do %>
+                <button type="button" class="btn btn-outline-secondary">ジャンル一覧</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to destroy_admin_session_path,method: :delete do %>
+                <button type="button" class="btn btn-outline-secondary">ログアウト</button>
+              <% end %>
+            </li>
+            <% elsif customer_signed_in? %>
+              <p class="notice pl-3 mb-0 pt-2">
+                <%= notice %>
+              </p>
+            <li class="nav-link">
+              <%= link_to show_path(@customer) do %>
+                <button type="button" class="btn btn-outline-secondary">マイページ</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to items_path do %>
+                <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to cart_items_path do %>
+                <button type="button" class="btn btn-outline-secondary">カート</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to destroy_customer_session_path,method: :delete do %>
+                <button type="button" class="btn btn-outline-secondary">ログアウト</button>
+              <% end %>
+            </li>
+            <% else %>
+              <p class="alert pl-3 mb-0 pt-2">
+                <%= alert %>
+              </p>
+              <p class="notice pl-3 mb-0 pt-2">
+                <%= notice %>
+              </p>
+            <li class="nav-link">
+              <%= link_to about_path do %>
+                <button type="button" class="btn btn-outline-secondary">About</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to items_path do %>
+                <button type="button" class="btn btn-outline-secondary">商品一覧</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to new_customer_registration_path do %>
+                <button type="button" class="btn btn-outline-secondary">新規登録</button>
+              <% end %>
+            </li>
+            <li class="nav-link">
+              <%= link_to new_customer_session_path do %>
+                <button type="button" class="btn btn-outline-secondary">ログイン</button>
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="pt-4">
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted"></span>
+    </div>
+    </footer>
   </body>
 </html>

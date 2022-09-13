@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <h3 class="pt-5 pb-4"><strong>商品一覧</strong>
+      <span>(全<%= Item.count %>件）</span>
+    </h3>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @items .each do |item| %>
+    <div class="col-3 pt-3">
+      <div class="height: auto text-wrap">
+        <%= link_to item_path(item) do %>
+          <%= image_tag item.get_image(200,200) %></br>
+        <% end %>
+        <strong><%= item.name %></strong></br>
+        <strong>¥<%= item.price.to_s(:delimited) %></strong>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <nav aria-label="...">
+    <ul class="pagination justify-content-center pt-2">
+      <%= paginate @items %>
+    </ul>
+  </nav>
+
+</div>

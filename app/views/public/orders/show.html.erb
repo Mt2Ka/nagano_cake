@@ -1,0 +1,84 @@
+<div class="container">
+  <h4 class="ml-4">注文履歴詳細</h4>
+
+  <div class="row">
+    <div class="col-8">
+      <h5><strong>注文情報</strong></h5>
+      <table class="table table-bordered border-dark">
+        <tr>
+          <th class="table-active">注文日</th>
+          <td><%= @order.created_at.strftime("%Y/%m/%d/").to_s %></td>
+        </tr>
+        <tr>
+          <th class="table-active">配送先</th>
+          <td>
+            〒<%= @order.delivery_postal_code %></br>
+            <%= @order.delivery_address %></br>
+            <%= @order.delivery_name %>
+          </td>
+        </tr>
+        <tr>
+          <th class="table-active">支払方法</th>
+          <td><%= @order.payment_method_i18n %></td>
+        </tr>
+        <tr>
+          <th class="table-active">ステータス</th>
+          <td><%= @order.order_status_i18n %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-3 pb-3">
+      <h5><strong>請求情報</strong></h5>
+        <table class="table table-bordered border-dark">
+          <tr>
+            <th class="table-active">商品合計</th>
+              <td>
+                <% @sum = 0 %>
+                <% @order.order_details.each do |order_detail| %>
+                  <% ((order_detail.item.price*1.1).floor*order_detail.quantity).to_s(:delimited) %>
+                  <% @sum += ((order_detail.item.price*1.1).floor*order_detail.quantity) %>
+                <% end %>
+                <%= @sum.to_s(:delimited) %>
+              </td>
+          </tr>
+          <tr>
+            <th class="table-active">配送料</th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th class="table-active">ご請求額</th>
+            <td><%= (@sum + @order.postage).to_s(:delimited) %></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+
+  <div class="row pb-3">
+    <div class="col-10">
+      <table class="table table-bordered border-dark">
+        <thead>
+          <tr>
+            <th class="table-active">商品</th>
+            <th class="table-active">単価（税込）</th>
+            <th class="table-active">個数</th>
+            <th class="table-active">小計</th>
+          </tr>
+        </thead>
+
+        <% @order.order_details.each do |order_detail| %>
+        <tbody>
+        <tr>
+          <td><span><%= order_detail.item.name %></span></td>
+          <td><span><%= ((order_detail.item.price*1.1).floor).to_s(:delimited) %></span></td>
+          <td><span><%= order_detail.quantity %></span></td>
+          <td><span>
+            <%= ((order_detail.item.price*1.1).floor*order_detail.quantity).to_s(:delimited) %>
+          </span></td>
+        </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+

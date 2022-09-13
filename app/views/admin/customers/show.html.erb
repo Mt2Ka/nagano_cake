@@ -1,0 +1,92 @@
+<div class="container">
+  <h5 class="ml-4 pl-5">
+    <%= @customer.last_name %><%= @customer.first_name %> さんの会員詳細
+  </h5>
+
+  <div class="row pl-5 pt-4">
+    <div class="col-2 pl-1">
+      <p>会員ID</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.id %></br>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <p>氏名</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.last_name %>　<%= @customer.first_name %>
+    </div>      
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <p>フリガナ</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.last_name_kana %>　<%= @customer.first_name_kana %>     
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <p>郵便番号</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.postal_code %>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <p>住所</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.address %>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <p>電話番号</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.telephone_number %>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <p>メールアドレス</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.email %>
+    </div>
+  </div>
+  <div class="row pl-5 pt-2">
+    <div class="col-2 pl-1">
+      <p>会員ステータス</p>
+    </div>
+    <div class="col-9 text-success">
+      <% if @customer.is_active == true %>
+        <strong class="text-success">有効</strong>
+      <% else %>
+        <strong class="text-secondary">退会</strong>
+      <% end %>
+    </div>
+  </div>
+</div>
+  
+<div class="container center_block" style="width:43rem;">
+  <div class="row pt-3">
+    <div class="col-4">
+      <%= link_to edit_admin_customer_path(@customer.id),method: :get do %>
+        <button type="button" class="btn btn-sm btn-success">編集する</button>
+      <% end %>
+    </div>
+    
+    <div class="col-auto pt-1 pl-0"> 
+      <%= link_to admin_root_path,method: :get do %>
+        <button type="button" class="btn btn-sm btn-primary">注文履歴一覧を見る</button>
+      <% end %> 
+    </div>
+  </div>  
+</div>
+  
+

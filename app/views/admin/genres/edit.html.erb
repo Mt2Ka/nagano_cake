@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <h4 class="ml-4 mb-3 pt-2 pb-4">ジャンル編集</h4>
+    </div>
+  </div>
+  
+  <% if @genre.errors.any? %>
+    <div id="error_explanation">
+      <h5 class="text-danger pt-3"><%= pluralize(@genre.errors.count,"件") %> 入力エラーがあります。</h5>
+      <p class="text-danger">ジャンル名を入力してください。</p>
+    </div>
+  <% end %>
+
+  <div class="row pb-4">
+    <div class="col-auto">
+    <%= form_with model:@genre,url:admin_genre_path,method: :patch do |f| %>
+      <label for="name"><strong>ジャンル名</strong></label>
+    </div>
+    <div class="col-auto">
+      <%= f.text_field :name,placeholder: "ジャンル名" %>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-sm btn-success" type="submit">変更を保存</button></br>
+    </div>
+    <% end %>
+  </div>

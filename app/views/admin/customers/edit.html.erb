@@ -1,0 +1,95 @@
+<div class="container">
+  <h5 class="ml-4 pl-5">
+    <%= @customer.last_name %><%= @customer.first_name %> さんの会員情報編集
+  </h5>
+
+  <%= form_with model:@customer,url:admin_customer_path,method: :patch do |f| %>
+  <div class="row pl-5 pt-4">
+    <div class="col-2 pl-1">
+      <p>会員ID</p>
+    </div>
+    <div class="col-9">
+      <%= @customer.id %>
+    </div>
+  </div>
+  
+  <div class="row pl-5">
+    <div class="col-2 pl-1">
+      <label for="customer_name">氏名</label>
+    </div>
+    <div class="col-9">
+      <%= f.text_field :last_name %>
+      <%= f.text_field :first_name %></br>      
+    </div>
+  </div>
+  
+  <div class="row pl-5 pt-3">
+    <div class="col-2 pl-1">
+      <label for="customer_name">フリガナ</label>
+    </div>
+    <div class="col-9">
+      <%= f.text_field :last_name_kana %>
+      <%= f.text_field :first_name_kana %>
+    </div>
+  </div>
+  
+  <div class="row pl-5 pt-3">
+    <div class="col-2 pl-1">
+      <label for="postal_code">郵便番号</label>
+    </div>
+    <div class="col-9">
+      <%= f.text_field :postal_code %>      
+    </div>
+  </div>
+  
+  <div class="row pl-5 pt-3">
+    <div class="col-2 pl-1">
+      <label for="address">住所</label>
+    </div>
+    <div class="col-9">
+      <%= f.text_field :address %>            
+    </div>
+  </div>
+  
+  <div class="row pl-5 pt-3">
+    <div class="col-2 pl-1">
+      <label for="telephone_number">電話番号</label>
+    </div>
+    <div class="col-9">
+      <%= f.text_field :telephone_number %>        
+    </div>
+  </div>
+  
+  <div class="row pl-5 pt-3">
+    <div class="col-2 pl-1">
+      <label for="email">メールアドレス</label>
+    </div>
+    <div class="col-9">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>      
+    </div>
+  </div>
+  
+  <div class="row pl-5 pt-3">
+    <div class="col-2 pl-1">
+      <label for="is_active">会員ステータス</label>
+    </div>
+    <div class="col-9">
+      <%= f.radio_button :is_active, 'true' %>
+      <%= f.label :is_active, "有効", value: true %>
+    
+      <%= f.radio_button :is_active, 'false' %>
+      <%= f.label :is_active, "退会", value: false %>
+    </div>
+  </div>
+
+<div class="container center_block" style="width:40rem;">
+  <div class="row pt-3">
+    <div class="col-5">
+      <button class="btn btn-success" type="submit">変更を保存</button>           
+    </div>
+  </div>  
+</div>
+  
+<% end %>
+</div>
+

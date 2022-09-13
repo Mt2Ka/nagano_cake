@@ -1,0 +1,21 @@
+<div class="container m-auto pt-3">
+  <div class="row">
+    <div class="col-auto pt-3">
+      <span><%= image_tag @item.get_image(250,250) %></span>
+    </div>
+    <div class="col-auto pt-3">
+      <strong><%= @item.name %></strong></br>
+      <p><%= @item.introduction %></p></br>
+      <strong>¥<%= ((@item.price*1.1).floor).to_s(:delimited) %></strong>（税込）
+
+      <%= form_with model: @cart_item,url: cart_items_path,method: :post do |f| %>
+
+        <%= f.hidden_field :item_id, :value => @item.id %> 
+        <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
+        <button class="btn btn-sm btn-success ml-3" type="submit">カートに入れる</button></br
+      <% end %>
+  </div>
+</div>
+  
+
+
