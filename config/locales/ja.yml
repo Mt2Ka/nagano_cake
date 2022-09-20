@@ -7,14 +7,14 @@ ja:
       order_status:
         waiting: "入金待ち"
         paid_up: "入金確認"
-        making: "製作中"
+        producing: "製作中"
         preparing: "発送準備中"
         shipped: "発送済み"
     order_detail:
       production_status:
         impossible: "製作不可"
         waiting: "製作待ち"
-        maiking: "製作中"
+        making: "製作中"
         completion: "製作完了"
 
 

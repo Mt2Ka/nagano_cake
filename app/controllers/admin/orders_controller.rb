@@ -8,10 +8,38 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    if @order.update(order_params)
+    @order.update(order_params)
+    @order_details = @order.order_details
+      if @order.order_status == "waiting"
+        @order_details.each do |order_detail|
+          order_detail.production_status = "impossible"
+          order_detail.save
+        end
+      elsif @order.order_status == "paid_up"
+        @order_details.each do |order_detail|
+          order_detail.production_status = "waiting"
+          order_detail.save
+        end
+      elsif @order.order_status == "producing"
+        @order_details.each do |order_detail|
+          order_detail.production_status = "maiking"
+          order_detail.save
+        end
+      elsif @order.order_status == "preparing"
+        @order_details.each do |order_detail|
+          order_detail.production_status = "completion"
+          order_detail.save
+        end
+      else
+        @order_details.each do |order_detail|
+          order_detail.production_status = "completion"
+          order_detail.save
+        end
+      end
+
       flash[:notice] = "注文ステータスを更新しました。"
       redirect_to admin_order_path(@order.id)
-    end
+
   end
 
   private
